@@ -72,3 +72,8 @@ Delete
     [Arguments]    ${resp}
     Should Be Equal As Strings    ${resp.status_code}    200
     Should Be Equal As Strings    ${resp.json()['message']}    OK
+
+md5加密
+    [Arguments]    ${code}
+    ${md5code}    Evaluate    hashlib.md5('${code}'.encode(encoding='utf-8')).hexdigest()    hashlib
+    [Return]    ${md5code}
