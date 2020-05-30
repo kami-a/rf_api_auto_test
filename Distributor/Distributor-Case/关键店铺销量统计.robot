@@ -68,8 +68,7 @@ Resource          ../Distributor-Resource/关键店铺销量.robot
     查询店铺每日订单数和价格    mall    2000100831    ${date2}
     销量前五    mall    2000100831    ${date2}
     #总销售额
-    ${resp1}    获取店铺信息    mall    2000100831
-    ${creatDay}    Convert Date    ${resp1.json()['result']['created']}    %Y-%m-%d
+    ${creatDay}    Convert Date    ${resp.json()['result']['created']}    %Y-%m-%d
     ${resp2}    查询店铺订单商品总数和价格    mall    2000100831    ${creatDay}
     log    ${resp2.json()['result']['totalPrice']}
     查询店铺每日订单数和价格    mall    2000100831    ${creatDay}
@@ -95,10 +94,14 @@ Resource          ../Distributor-Resource/关键店铺销量.robot
     查询店铺订单商品总数和价格    fmall    2000114400    ${date2}
     查询店铺每日订单数和价格    fmall    2000114400    ${date2}
     销量前五    fmall    2000114400    ${date2}
+    #1个年
+    ${date3}    Get Current Date    result_format=%Y
+    查询店铺订单商品总数和价格    fmall    2000114400    ${date3}-01-01
+    查询店铺每日订单数和价格    fmall    2000114400    ${date3}-01-01
+    销量前五    fmall    2000114400    ${date3}-01-01
     #总销售额
     ${creatDay}    Convert Date    ${resp.json()['result']['created']}    %Y-%m-%d
-    ${resp2}    查询店铺订单商品总数和价格    fmall    2000114400    ${creatDay}
-    log    ${resp2.json()['result']['totalPrice']}
+    查询店铺订单商品总数和价格    fmall    2000114400    ${creatDay}
     查询店铺每日订单数和价格    fmall    2000114400    ${creatDay}
     销量前五    fmall    2000114400    ${creatDay}
     ${resp3}    查询店铺每页订单简况    fmall    2000114400    ${creatDay}
@@ -122,6 +125,11 @@ Resource          ../Distributor-Resource/关键店铺销量.robot
     查询店铺订单商品总数和价格    mall    2000001047    ${date2}
     查询店铺每日订单数和价格    mall    2000001047    ${date2}
     销量前五    mall    2000001047    ${date2}
+    #1个年
+    ${date3}    Get Current Date    result_format=%Y
+    查询店铺订单商品总数和价格    mall    2000001047    ${date3}-01-01
+    查询店铺每日订单数和价格    mall    2000001047    ${date3}-01-01
+    销量前五    mall    2000001047    ${date3}-01-01
     #总销售额
     ${creatDay}    Convert Date    ${resp.json()['result']['created']}    %Y-%m-%d
     ${resp2}    查询店铺订单商品总数和价格    mall    2000001047    ${creatDay}
