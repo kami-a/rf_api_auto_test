@@ -77,3 +77,8 @@ md5加密
     [Arguments]    ${code}
     ${md5code}    Evaluate    hashlib.md5('${code}'.encode(encoding='utf-8')).hexdigest()    hashlib
     [Return]    ${md5code}
+
+base64加密
+    [Arguments]    ${code}
+    ${base64code}    Evaluate    base64.b64encode(b'${code}')    base64
+    [Return]    ${base64code}
