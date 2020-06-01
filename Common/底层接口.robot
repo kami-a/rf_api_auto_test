@@ -15,11 +15,11 @@ Post
     ${header1}    create dictionary    Content-Type=application/json
     ${header}    Set Variable If    ${status}    ${header}    ${header1}
     ${cookies}    create dictionary    mobile_login_token=${token}
-    Run Keyword If    '${url}'=='fmall' and '${token}'==''    create session    event    ${urlfmall}    ${header}    verify=true
-    ...    ELSE IF    '${url}'=='fmall' and '${token}'!=''    create session    event    ${urlfmall}    ${header}    ${cookies}    verify=true
-    Run Keyword If    '${url}'=='mall' and '${token}'==''    create session    event    ${urlmall}    ${header}    verify=true
-    ...    ELSE IF    '${url}'=='mall' and '${token}'!=''    create session    event    ${urlmall}    ${header}    ${cookies}    verify=true
-    Run Keyword If    '${url}'=='adpcloud'    create session    event    ${adpcloud}    ${header}    verify=true
+    Run Keyword If    '${url}'=='fmall' and '${token}'==''    create session    event    ${urlfmall}    ${header}
+    ...    ELSE IF    '${url}'=='fmall' and '${token}'!=''    create session    event    ${urlfmall}    ${header}    ${cookies}
+    Run Keyword If    '${url}'=='mall' and '${token}'==''    create session    event    ${urlmall}    ${header}
+    ...    ELSE IF    '${url}'=='mall' and '${token}'!=''    create session    event    ${urlmall}    ${header}    ${cookies}
+    Run Keyword If    '${url}'=='adpcloud'    create session    event    ${adpcloud}    ${header}
     ${body}    Set Variable    ${body}
     ${resp}    Post Request    event    ${uri}    ${body}
     [Return]    ${resp}
