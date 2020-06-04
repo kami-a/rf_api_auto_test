@@ -18,8 +18,8 @@ Resource          ../../Common/底层接口.robot
     [Return]    ${resp}
 
 添加商品到购物车
-    [Arguments]    ${token}    ${distributionShopId}    ${distributionItemId}    ${sellerId}    ${shopid}    ${skuid}    ${uid}
-    ${resp}    Post    fmall    /mobile/shopCart/add    {"distributionRequest":{"distributionId":null,"distributionItemId":"${distributionItemId}","distributionShopId":"${distributionShopId}"},"product":{"qty":"9789","advanceActivitySellerId":"","depositValue":"","itemId":"1000135269","payType":0,"quantity":1,"regionId":"11","sellerId":"${sellerId}","shopId":"${shopid}","skuId":"${skuid}"},"quantityNum":"undefined","uid":"${uid}"}    ${token}
+    [Arguments]    ${token}    ${distributionShopId}    ${distributionItemId}    ${itemid}    ${sellerId}    ${shopid}    ${skuid}    ${uid}
+    ${resp}    Post    fmall    /mobile/shopCart/add    {"distributionRequest":{"distributionId":null,"distributionItemId":"${distributionItemId}","distributionShopId":"${distributionShopId}"},"product":{"qty":"9789","advanceActivitySellerId":"","depositValue":"","itemId":"${itemid}","payType":0,"quantity":1,"regionId":"11","sellerId":"${sellerId}","shopId":"${shopid}","skuId":"${skuid}"},"quantityNum":"undefined","uid":"${uid}"}    ${token}
     [Return]    ${resp}
 
 购物车删除商品

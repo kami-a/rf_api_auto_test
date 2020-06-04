@@ -2,8 +2,8 @@
 Resource          ../../Common/底层接口.robot
 
 *** Variables ***
-${user}           18813760631
-${finalpwd}       LOGINPASSWORDLNQRcBEcowLqu0fBH5gNdZ6zlJf2yrbq5gAa0HeHr1JYcgxYINFOQYTULqZ3zC8Ck7Qo7k382OKP52yBmVH4WC%2FpWg17GC%2Fawbtnl6ZdYbORzPu22MY44xIXqDXPjmim0etaz%2BaqjAeoMcqrOAfYBbjNBmEAa2t0%2F1PCjFeQKIM%3D
+${user}           10100000001
+${finalpwd}       gree123456
 
 *** Keywords ***
 分销商城登录
