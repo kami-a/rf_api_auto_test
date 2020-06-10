@@ -14,7 +14,7 @@ Resource          ../Distribution-Resource/购物车.robot
     ${distributionId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['distributionId']}
     ${distributionShopId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['distributionShopId']}
     ${distributionItemId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['distributionItemId']}
-    ${itemid}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['itemId']}
+    ${itemId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['itemId']}
     ${shopId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['shopId']}
     ${skuId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['skuId']}
     ${sellerId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['sellerId']}
@@ -25,6 +25,7 @@ Resource          ../Distribution-Resource/购物车.robot
     ${detailAddress}    Set Variable    ${resp1.json()['result'][0]['address']}
     ${fullAddress}    Set Variable    ${resp1.json()['result'][0]['fulladdress']}
     ${mobile}    Set Variable    ${resp1.json()['result'][0]['contactphone']}
+    log    手机号是：${mobile}
     ${name}    Set Variable    ${resp1.json()['result'][0]['contactperson']}
     ${provinceId}    Set Variable    ${resp1.json()['result'][0]['provicecode']}
     ${townId}    Set Variable    ${resp1.json()['result'][0]['towncode']}
@@ -36,7 +37,10 @@ Resource          ../Distribution-Resource/购物车.robot
     接口调用是否成功    ${resp3}
     #判断配送区域是true
     Should Be Equal As Strings    ${resp3.json()['result']['exitShopTerritory']}    True
-    ${resp4}    获取订单详情    ${token}    ${distributionId}    ${distributionItemId}    ${distributionShopId}    ${itemid}    ${sellerId}    ${shopId}    ${skuId}    ${provinceId}    ${cityId}    ${countyId}
+    ${resp4}    获取订单详情    ${token}    ${distributionId}    ${distributionItemId}    ${distributionShopId}    ${itemId}    ${sellerId}    ${shopId}    ${skuId}    ${provinceId}    ${cityId}    ${countyId}
     接口调用是否成功    ${resp4}
+    ${resp5}    提交订单    ${token}    ${distributionId}    ${distributionItemId}    ${distributionShopId}    ${itemId}    ${sellerId}    ${shopId}    ${skuId}    ${cityId}    ${countyId}    ${detailAddress}    ${fullAddress}    ${mobile}     ${name}    ${provinceId}
+    ...    ${townId}
+    接口调用是否成功    ${resp5}
 
 通过购物车提交订单
