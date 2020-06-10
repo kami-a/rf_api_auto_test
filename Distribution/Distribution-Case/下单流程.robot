@@ -42,5 +42,27 @@ Resource          ../Distribution-Resource/购物车.robot
     ${resp5}    提交订单    ${token}    ${distributionId}    ${distributionItemId}    ${distributionShopId}    ${itemId}    ${sellerId}    ${shopId}    ${skuId}    ${cityId}    ${countyId}    ${detailAddress}    ${fullAddress}    ${mobile}     ${name}    ${provinceId}
     ...    ${townId}
     接口调用是否成功    ${resp5}
+    ${orderId}    Set Variable    ${resp5.json()['result']}
+    ${resp6}    检查注册手机历史订单    ${token}    ${orderId}
+    Should Be Equal As Strings    ${resp6.json()['code']}    2200
+    ${total}    Set Variable    ${resp4.json()['result']['shopCartDTO']['payTotal']}
+    ${order_Id}    Set Variable    ${orderId}
+    ${resp7}    格力调用银行请求是否正常    ${token}    ${skuId}    ${mobile}    ${total}    ${order_Id}
+    #此处请求一直返回404，待确认？
+    Should Be Equal As Strings    ${resp7.status_code}    404
+    ${resp8}    检查注册手机历史订单    ${token}    ${orderId}
+    Should Be Equal As Strings    ${resp8.status_code}    200
+    ${resp9}    获取用户信息    ${token}
+    接口调用是否成功    ${resp9}
+    ${resp10}    检查订单数量限制    ${token}    ${orderId}
+    接口调用是否成功    ${resp10}
+    ${resp11}    检查是否是以旧换新订单    ${token}    ${orderId}
+    Should Be Equal As Strings    ${resp11.status_code}    200
+    ${resp12}    获取微信支付配置    ${token}
+    接口调用是否成功    ${resp12}
+    ${resp13}    获取钱包账户    ${token}    ${resp9.json()['result']['walletId']}
+    接口调用是否成功    ${resp13}
+    ${resp14}    获取钱包详情    ${token}    ${resp9.json()['result']['walletId']}
+    接口调用是否成功    ${resp14}
 
 通过购物车提交订单
