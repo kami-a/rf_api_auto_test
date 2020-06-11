@@ -22,7 +22,8 @@ Post
     ...    ELSE IF    '${url}'=='mall' and '${token}'!=''    create session    event    ${urlmall}    ${header}    ${cookies}    verify=true
     Run Keyword If    '${url}'=='adpcloud'    create session    event    ${adpcloud}    ${header}    verify=true
     ...    ELSE IF    '${url}'=='adpcloud'    create session    event    ${adpcloud}    ${header}    ${cookies}    verify=true
-    Run Keyword If    '${url}'=='dm' and '${token}'==''     create session    event    ${dm}    ${header}    verify=true    \    '${url}'=='dm' and '${token}'!=''    create session    event    ${dm}    ${header}    ${cookies}    verify=true
+    Run Keyword If    '${url}'=='dm' and '${token}'==''     create session    event    ${dm}    ${header}    verify=true
+    ...    ELSE IF    '${url}'=='dm' and '${token}'!=''    create session    event    ${dm}    ${header}    ${cookies}    verify=true
     ${body}    Set Variable    ${body}
     ${resp}    Post Request    event    ${uri}    ${body}
     [Return]    ${resp}

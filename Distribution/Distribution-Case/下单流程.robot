@@ -48,8 +48,7 @@ Resource          ../Distribution-Resource/购物车.robot
     ${total}    Set Variable    ${resp4.json()['result']['shopCartDTO']['payTotal']}
     ${order_Id}    Set Variable    ${orderId}
     ${resp7}    格力调用银行请求是否正常    ${token}    ${skuId}    ${mobile}    ${total}    ${order_Id}
-    #此处请求一直返回404，待确认？
-    Should Be Equal As Strings    ${resp7.status_code}    404
+    Should Be Equal As Strings    ${resp7.status_code}    200
     ${resp8}    检查注册手机历史订单    ${token}    ${orderId}
     Should Be Equal As Strings    ${resp8.status_code}    200
     ${resp9}    获取用户信息    ${token}
