@@ -64,5 +64,3 @@ Resource          ../Distribution-Resource/购物车.robot
     接口调用是否成功    ${resp13}
     ${resp14}    获取钱包详情    ${token}    ${resp9.json()['result']['walletId']}
     接口调用是否成功    ${resp14}
-
-通过购物车提交订单
