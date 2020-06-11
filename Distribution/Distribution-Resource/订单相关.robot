@@ -66,3 +66,18 @@ Resource          ../../Common/底层接口.robot
     [Arguments]    ${token}    ${skuId}    ${mobile}    ${total}    ${order_id}
     ${resp}    Post    dm    common-log/api/v1/log/gree    {"account_id":"","activity_id":"","channel":"H5","cmd_count":"1","commodity_id":"${skuId}","member_id":"${mobile}","money":"${total}","order_id":"${order_id}","type":"unpay"}    ${token}
     [Return]    ${resp}
+
+查看所有订单
+    [Arguments]    ${token}
+    ${resp}    Post    fmall    mobile/user/order/getBuyerOrderList    {"page":"1","state":""}    ${token}
+    [Return]    ${resp}
+
+查看订单详情
+    [Arguments]    ${token}    ${orderId}
+    ${resp}    Post    fmall    mobile/user/order/getDetail    {"orderId":"${orderId}"}    ${token}
+    [Return]    ${resp}
+
+取消订单
+    [Arguments]    ${token}    ${orderId}
+    ${resp}    Post    fmall    mobile/user/order/getDetail    {"orderId":"${orderId}"}    ${token}
+    [Return]    ${resp}

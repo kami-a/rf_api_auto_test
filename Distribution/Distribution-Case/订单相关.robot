@@ -1,8 +1,8 @@
 *** Settings ***
 Resource          ../Distribution-Resource/HomepageAndCategory.robot
 Resource          ../Distribution-Resource/分销商城登录.robot
-Resource          ../Distribution-Resource/下单流程.robot
 Resource          ../Distribution-Resource/购物车.robot
+Resource          ../Distribution-Resource/订单相关.robot
 
 *** Test Cases ***
 直接提交订单
@@ -39,7 +39,7 @@ Resource          ../Distribution-Resource/购物车.robot
     Should Be Equal As Strings    ${resp3.json()['result']['exitShopTerritory']}    True
     ${resp4}    获取订单详情    ${token}    ${distributionId}    ${distributionItemId}    ${distributionShopId}    ${itemId}    ${sellerId}    ${shopId}    ${skuId}    ${provinceId}    ${cityId}    ${countyId}
     接口调用是否成功    ${resp4}
-    ${resp5}    提交订单    ${token}    ${distributionId}    ${distributionItemId}    ${distributionShopId}    ${itemId}    ${sellerId}    ${shopId}    ${skuId}    ${cityId}    ${countyId}    ${detailAddress}    ${fullAddress}    ${mobile}     ${name}    ${provinceId}
+    ${resp5}    提交订单    ${token}    ${distributionId}    ${distributionItemId}    ${distributionShopId}    ${itemId}    ${sellerId}    ${shopId}    ${skuId}    ${cityId}    ${countyId}    ${detailAddress}    ${fullAddress}    ${mobile}    ${name}    ${provinceId}
     ...    ${townId}
     接口调用是否成功    ${resp5}
     ${orderId}    Set Variable    ${resp5.json()['result']}
@@ -63,3 +63,16 @@ Resource          ../Distribution-Resource/购物车.robot
     接口调用是否成功    ${resp13}
     ${resp14}    获取钱包详情    ${token}    ${resp9.json()['result']['walletId']}
     接口调用是否成功    ${resp14}
+
+查看订单取消订单
+    ${resp0}    分销商城登录
+    接口调用是否成功    ${resp0}
+    ${token}    set variable    ${resp0.json()['result']['token']}
+    log    token is :${token}
+    ${resp1}    查看所有订单    ${token}
+    接口调用是否成功    ${resp1}
+    ${orderId}    set variable    ${resp1.json()['result'][0]['orderId']}
+    ${resp2}    查看订单详情    ${token}    ${orderId}
+    接口调用是否成功    ${resp2}
+    ${resp3}    取消订单    ${token}    ${orderId}
+    接口调用是否成功    ${resp3}
