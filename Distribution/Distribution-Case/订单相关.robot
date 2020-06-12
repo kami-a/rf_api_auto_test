@@ -3,6 +3,7 @@ Resource          ../Distribution-Resource/HomepageAndCategory.robot
 Resource          ../Distribution-Resource/分销商城登录.robot
 Resource          ../Distribution-Resource/购物车.robot
 Resource          ../Distribution-Resource/订单相关.robot
+Library           String
 
 *** Test Cases ***
 直接提交订单
@@ -75,4 +76,19 @@ Resource          ../Distribution-Resource/订单相关.robot
     ${resp2}    查看订单详情    ${token}    ${orderId}
     接口调用是否成功    ${resp2}
     ${resp3}    取消订单    ${token}    ${orderId}
+    接口调用是否成功    ${resp3}
+
+搜索订单
+    ${resp0}    分销商城登录
+    接口调用是否成功    ${resp0}
+    ${token}    set variable    ${resp0.json()['result']['token']}
+    log    token is :${token}
+    ${resp1}    查看所有订单    ${token}
+    接口调用是否成功    ${resp1}
+    ${orderId}    Set Variable    ${resp1.json()['result'][0]['orderId']}
+    ${resp2}    搜索订单    ${token}    ${orderId}
+    接口调用是否成功    ${resp2}
+    ${itemName}    Set Variable    ${resp1.json()['result'][0]['itemInfoList'][0]['itemName']}
+    ${subName}    String.Get Substring    ${itemName}    0    1
+    ${resp3}    搜索订单    ${token}    ${subName}
     接口调用是否成功    ${resp3}

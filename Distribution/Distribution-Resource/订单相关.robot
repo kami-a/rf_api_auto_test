@@ -81,3 +81,8 @@ Resource          ../../Common/底层接口.robot
     [Arguments]    ${token}    ${orderId}
     ${resp}    Post    fmall    mobile/user/order/getDetail    {"orderId":"${orderId}"}    ${token}
     [Return]    ${resp}
+
+搜索订单
+    [Arguments]    ${token}    ${keyword}
+    ${resp}    Post    fmall    mobile/user/order/getBuyerOrderList    {"keyword":"${keyword}"}    ${token}
+    [Return]    ${resp}
