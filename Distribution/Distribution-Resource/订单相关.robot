@@ -68,8 +68,8 @@ Resource          ../../Common/底层接口.robot
     [Return]    ${resp}
 
 查看所有订单
-    [Arguments]    ${token}
-    ${resp}    Post    fmall    mobile/user/order/getBuyerOrderList    {"page":"1","state":""}    ${token}
+    [Arguments]    ${token}    ${state}
+    ${resp}    Post    fmall    mobile/user/order/getBuyerOrderList    {"page":"1","state":"${state}"}    ${token}
     [Return]    ${resp}
 
 查看订单详情
@@ -79,10 +79,15 @@ Resource          ../../Common/底层接口.robot
 
 取消订单
     [Arguments]    ${token}    ${orderId}
-    ${resp}    Post    fmall    mobile/user/order/getDetail    {"orderId":"${orderId}"}    ${token}
+    ${resp}    Post    fmall    mobile/user/order/cancel    {"orderId":"${orderId}"}    ${token}
     [Return]    ${resp}
 
 搜索订单
     [Arguments]    ${token}    ${keyword}
     ${resp}    Post    fmall    mobile/user/order/getBuyerOrderList    {"keyword":"${keyword}"}    ${token}
+    [Return]    ${resp}
+
+删除订单
+    [Arguments]    ${token}    ${orderId}
+    ${resp}    Post    fmall    mobile/user/order/deleteOrderById    {"orderId":"${orderId}"}    ${token}
     [Return]    ${resp}

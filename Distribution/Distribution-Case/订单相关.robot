@@ -65,25 +65,30 @@ Library           String
     ${resp14}    获取钱包详情    ${token}    ${resp9.json()['result']['walletId']}
     接口调用是否成功    ${resp14}
 
-查看订单取消订单
+查看订单/取消订单/删除订单
     ${resp0}    分销商城登录
     接口调用是否成功    ${resp0}
     ${token}    set variable    ${resp0.json()['result']['token']}
-    log    token is :${token}
-    ${resp1}    查看所有订单    ${token}
+    ${resp1}    查看所有订单    ${token}    ${EMPTY}
     接口调用是否成功    ${resp1}
     ${orderId}    set variable    ${resp1.json()['result'][0]['orderId']}
     ${resp2}    查看订单详情    ${token}    ${orderId}
     接口调用是否成功    ${resp2}
-    ${resp3}    取消订单    ${token}    ${orderId}
+    ${resp3}    查看所有订单    ${token}    1
     接口调用是否成功    ${resp3}
+    ${cancelOrderId}    set variable    ${resp3.json()['result'][0]['orderId']}
+    ${resp4}    取消订单    ${token}    ${cancelOrderId}
+    接口调用是否成功    ${resp4}
+    #已取消订单可以删除
+    ${resp5}    删除订单    ${token}    ${cancelOrderId}
+    接口调用是否成功    ${resp5}
 
 搜索订单
     ${resp0}    分销商城登录
     接口调用是否成功    ${resp0}
     ${token}    set variable    ${resp0.json()['result']['token']}
     log    token is :${token}
-    ${resp1}    查看所有订单    ${token}
+    ${resp1}    查看所有订单    ${token}    ${EMPTY}
     接口调用是否成功    ${resp1}
     ${orderId}    Set Variable    ${resp1.json()['result'][0]['orderId']}
     ${resp2}    搜索订单    ${token}    ${orderId}
