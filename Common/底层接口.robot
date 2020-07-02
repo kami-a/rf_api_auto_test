@@ -91,3 +91,8 @@ base64加密
     [Arguments]    ${code}
     ${base64code}    Evaluate    base64.b64encode(b'${code}')    base64
     [Return]    ${base64code}
+
+空转为null非空直接输出
+    [Arguments]    ${value}
+    ${variable}    Set Variable If    '${value}'=='${None}'    null    ${value}
+    [Return]    ${variable}

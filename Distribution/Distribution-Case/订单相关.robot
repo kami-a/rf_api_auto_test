@@ -12,25 +12,27 @@ Library           String
     ${token}    set variable    ${resp0.json()['result']['token']}
     ${resp}    查询商品列表    null    2000002215    ${token}
     接口调用是否成功    ${resp}
-    ${distributionId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['distributionId']}
-    ${distributionShopId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['distributionShopId']}
-    ${distributionItemId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['distributionItemId']}
-    ${itemId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['itemId']}
-    ${shopId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['shopId']}
-    ${skuId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['skuId']}
-    ${sellerId}    set variable    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['sellerId']}
+    log    ${resp.content}
+    log    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['distributionId']}
+    ${distributionId}    空转为null非空直接输出    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['distributionId']}
+    ${distributionShopId}    空转为null非空直接输出    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['distributionShopId']}
+    ${distributionItemId}    空转为null非空直接输出    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['distributionItemId']}
+    ${itemId}    空转为null非空直接输出    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['itemId']}
+    ${shopId}    空转为null非空直接输出    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['shopId']}
+    ${skuId}    空转为null非空直接输出    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['skuId']}
+    ${sellerId}    空转为null非空直接输出    ${resp.json()['result']['searchGoodsResponse']['skuDTOList'][0]['sellerId']}
     ${resp1}    获取个人收货地址列表    ${token}
     接口调用是否成功    ${resp1}
-    ${cityId}    Set Variable    ${resp1.json()['result'][0]['citycode']}
-    ${countyId}    Set Variable    ${resp1.json()['result'][0]['countrycode']}
-    ${detailAddress}    Set Variable    ${resp1.json()['result'][0]['address']}
-    ${fullAddress}    Set Variable    ${resp1.json()['result'][0]['fulladdress']}
-    ${mobile}    Set Variable    ${resp1.json()['result'][0]['contactphone']}
+    ${cityId}    空转为null非空直接输出    ${resp1.json()['result'][0]['citycode']}
+    ${countyId}    空转为null非空直接输出    ${resp1.json()['result'][0]['countrycode']}
+    ${detailAddress}    空转为null非空直接输出    ${resp1.json()['result'][0]['address']}
+    ${fullAddress}    空转为null非空直接输出    ${resp1.json()['result'][0]['fulladdress']}
+    ${mobile}    空转为null非空直接输出    ${resp1.json()['result'][0]['contactphone']}
     log    手机号是：${mobile}
-    ${name}    Set Variable    ${resp1.json()['result'][0]['contactperson']}
-    ${provinceId}    Set Variable    ${resp1.json()['result'][0]['provicecode']}
-    ${townId}    Set Variable    ${resp1.json()['result'][0]['towncode']}
-    ${userAddressId}    Set Variable    ${resp1.json()['result'][0]['id']}
+    ${name}    空转为null非空直接输出    ${resp1.json()['result'][0]['contactperson']}
+    ${provinceId}    空转为null非空直接输出    ${resp1.json()['result'][0]['provicecode']}
+    ${townId}    空转为null非空直接输出    ${resp1.json()['result'][0]['towncode']}
+    ${userAddressId}    空转为null非空直接输出    ${resp1.json()['result'][0]['id']}
     log    ${userAddressId}
     ${resp2}    获取收货地址    ${token}    ${userAddressId}
     接口调用是否成功    ${resp2}
@@ -43,11 +45,11 @@ Library           String
     ${resp5}    提交订单    ${token}    ${distributionId}    ${distributionItemId}    ${distributionShopId}    ${itemId}    ${sellerId}    ${shopId}    ${skuId}    ${cityId}    ${countyId}    ${detailAddress}    ${fullAddress}    ${mobile}    ${name}    ${provinceId}
     ...    ${townId}
     接口调用是否成功    ${resp5}
-    ${orderId}    Set Variable    ${resp5.json()['result']}
+    ${orderId}    空转为null非空直接输出    ${resp5.json()['result']}
     ${resp6}    检查注册手机历史订单    ${token}    ${orderId}
     Should Be Equal As Strings    ${resp6.json()['code']}    2200
-    ${total}    Set Variable    ${resp4.json()['result']['shopCartDTO']['payTotal']}
-    ${order_Id}    Set Variable    ${orderId}
+    ${total}    空转为null非空直接输出    ${resp4.json()['result']['shopCartDTO']['payTotal']}
+    ${order_Id}    空转为null非空直接输出    ${orderId}
     ${resp7}    格力调用银行请求是否正常    ${token}    ${skuId}    ${mobile}    ${total}    ${order_Id}
     Should Be Equal As Strings    ${resp7.status_code}    200
     ${resp8}    检查注册手机历史订单    ${token}    ${orderId}
