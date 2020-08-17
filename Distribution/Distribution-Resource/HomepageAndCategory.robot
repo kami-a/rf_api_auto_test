@@ -6,12 +6,15 @@ ${distributorShopId}    2000001629
 
 *** Keywords ***
 获取一级类目
-    ${response}    post    fmall    /mobile/category/getFirstCategory
+    [Arguments]    ${disShopid}
+    ${header}    Create Dictionary    Content-Type    application/x-www-form-urlencoded
+    ${body}    Create Dictionary    disShopId    ${disShopid}
+    ${response}    post    fmall    /mobile/category/getFirstCategory    ${body}    header=${header}
     [Return]    ${response}
 
 获取二级类目
-    [Arguments]    ${cid}
-    ${response}    post    fmall    /mobile/category/getChildCategory    {"cid":"${cid}"}
+    [Arguments]    ${cid}    ${disShopid}
+    ${response}    post    fmall    /mobile/category/getChildCategory    {"cid":"${cid}","disShopId":"${disShopid}"}
     [Return]    ${response}
 
 获取类目广告位
